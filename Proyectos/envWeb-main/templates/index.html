@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Operaciones de Conjuntos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            max-width: 600px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0d47a1;
+        }
+        .resultado {
+            background-color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Operaciones de Conjuntos</h1>
+
+    <form action="/" method="POST">
+        <label for="set_a">Conjunto A (separado por comas):</label>
+        <input type="text" id="set_a" name="set_a" 
+               value="{{ request.form.get('set_a', '') }}">
+
+        <label for="set_b">Conjunto B (separado por comas):</label>
+        <input type="text" id="set_b" name="set_b" 
+               value="{{ request.form.get('set_b', '') }}">
+
+        <button type="submit">Calcular operaciones</button>
+    </form>
+
+    {% if results %}
+        <div class="resultado">
+            <h2>Resultados de las Operaciones:</h2>
+            <p><strong>Unión (A ∪ B):</strong> {{ results.union }}</p>
+            <p><strong>Intersección (A ∩ B):</strong> {{ results.intersection }}</p>
+            <p><strong>Diferencia (A - B):</strong> {{ results.diff_a_b }}</p>
+            <p><strong>Diferencia (B - A):</strong> {{ results.diff_b_a }}</p>
+            <p><strong>Diferencia Simétrica (A △ B):</strong> {{ results.sym_diff }}</p>
+            <p><strong>A ⊆ B (¿A es subconjunto de B?):</strong> {{ results.is_subset }}</p>
+            <p><strong>A ⊇ B (¿A es superconjunto de B?):</strong> {{ results.is_superset }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
